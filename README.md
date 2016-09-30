@@ -51,11 +51,14 @@ Team:
 
 ## UML Deployment Diagram
 
-
+<p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Deployment Diagram 1.jpg" ></p>
 
 ## UML Sequence Diagrams
 
+<p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Sequence Diagram 1.jpg" ></p>
+
 UML Sequence for confirming the quotes by calling the `CarRentalModel`’s `confirmQuotes(List<Quote> quotes)` method, preparing and serializing the `WorkerPayload` and adding a `TaskOptions` object to the push queue (all at the front-end).
 
+<p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Sequence Diagram 2.jpg" ></p>
 
 UML Sequence for the deserializing the `WorkerPayload` and the actual confirming of the quotes by some `Worker` (all at the back-end).
