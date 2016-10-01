@@ -9,11 +9,11 @@ Course Distributed Systems: Java Google App Engine
 
 **Score**: Maximum Score
 
-# Design
+## Design
 
-##Part 1
+### Part 1
 
-###Loosely-coupled Back and Front End
+#### Loosely-coupled Back and Front End
 **At which step of the workflow for booking a car reservation (*create quote, collect quotes, and confirm quotes*) would the indirect communication between objects or components kick in?**
 *	We decided to let the indirect communication kick in at the ‘confirm quotes’ step. This step is the most process-intensive and so it will benefit most from being processed in the background at the back-end (*e.g. process, server*). This will allow our application to scale better as this step will decrease processing time at the front-end (*e.g. process, server*) which interacts directly with the customers.
 
@@ -26,7 +26,7 @@ Course Distributed Systems: Java Google App Engine
 *	Passing the reference of that data (for example the id in the datastore) would also be sensible. This would require that the task will have to do more datastore retrievals during its execution. But the data sent to the `Worker` servlet will be much less (since only the id must be sent over). It also ensures that we treat the data as remote (*e.g. no copies of the data are made*). This is the approach we took when passing over the `QuotesConfirmationStatus`. This is because this entity must be treated as remote, the task will change the `QuotesConfirmationStatus` and this change must pass through to the front-end so the user can see it.
 *	On the other hand passing the data by value requires more work when sending the data over to the `Worker` servlet. But the task itself will have to do less datastore retrievals. We took this approach with the list of quotes since this data is used only once (it only makes sense for one confirm quotes request).
 
-###The realization of the back-channel to the caller
+#### The realization of the back-channel to the caller
 **How to inform the front-end whether a background task has executed successfully or not?**
 *	As already mentioned a `QuoteConfirmationStatus` object will be created in the `CarRentalModel`’s `confirmQuotes(List<Quote> quotes)` method. Such an object contains an id, a renter name, the submit date and current status. Each `QuoteConfirmationStatus` object is an entity that is persisted upon creation. The `Worker` can retrieve the id from its `WorkerPayload` and update the status:
   *	`Submitted`: the quotes are submitted to the queue and are waiting for getting processed.
@@ -35,7 +35,7 @@ Course Distributed Systems: Java Google App Engine
   *	`Cancelled`: none of the quotes is confirmed.
 *	The `QuoteConfirmationStatus` objects of a given renter can be queried for at the front-end and will be displayed in a web page by making use of the JSP `confirmQuotesReply.jsp`.
 
-## Part 2
+### Part 2
 
 **Is there a scenario in which the code to confirm the quotes is executed multiple times in parallel, resulting in a positive confirmation to both clients' quotes?**
 * Possible scenario: if two sets of quotes of which only one of them may be confirmed are executed in parallel by two `Worker`s who indirectly fetched a car rental company entity with the same initial state (in which none of the quotes will conflict). If they both fetch the status of the same car before an actual reservation is made, a reservation will be made for both users while one should have failed since the car can only be given to one user.
@@ -53,11 +53,11 @@ Course Distributed Systems: Java Google App Engine
 **In case your solution to the previous question limits parallelism, would a different design of the indirect communication channels help to increase parallelism?** (*For this question, you may assume that a client will have quotes belonging to one car rental company only.*)
 *	The design using transactions as explained in the previous answer will still allow parallelism, in contrast to the serial execution of the tasks. But there is one limitation: All datastore operations in a transaction must operate on entities in the same entity group, if the transaction is a single group transaction, or on entities in a maximum of five entity groups, if the transaction is a cross-group (XG) transaction. [Java Datastore API](https://developers.google.com/appengine/docs/java/datastore/) Since we assume the client only has quotes belonging to one company this is not an issue.
 
-## UML Deployment Diagram
+### UML Deployment Diagram
 
 <p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Deployment Diagram.jpg" ></p>
 
-## UML Sequence Diagrams
+### UML Sequence Diagrams
 
 <p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Sequence Diagram 1.png" ></p>
 
