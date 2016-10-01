@@ -9,6 +9,10 @@ Course Distributed Systems: Java Google App Engine
 
 **Score**: Maximum Score
 
+## About
+Car rental application on top of Google App Engine (GAE) focussing on high availability and performance scalability using indirect
+communication techniques offerend by GAE.
+
 ## Design
 
 ### Part 1
