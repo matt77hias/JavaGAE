@@ -59,14 +59,14 @@ communication techniques offerend by GAE. (see full [car rental project](https:/
 
 ### UML Deployment Diagram
 
-<p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Deployment Diagram.jpg" ></p>
+<p align="center"><img src="res/UML Deployment Diagram.jpg" ></p>
 
 ### UML Sequence Diagrams
 
-<p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Sequence Diagram 1.png" ></p>
+<p align="center"><img src="res/UML Sequence Diagram 1.png" ></p>
 
 UML Sequence for confirming the quotes by calling the `CarRentalModel`’s `confirmQuotes(List<Quote> quotes)` method, preparing and serializing the `WorkerPayload` and adding a `TaskOptions` object to the push queue (all at the front-end).
 
-<p align="center"><img src="https://github.com/matt77hias/JavaGAE/blob/master/res/UML Sequence Diagram 2.png" ></p>
+<p align="center"><img src="res/UML Sequence Diagram 2.png" ></p>
 
 UML Sequence for the deserializing the `WorkerPayload` and the actual confirming of the quotes by some `Worker` (all at the back-end).
