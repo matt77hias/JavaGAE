@@ -16,7 +16,7 @@ Course Distributed Systems: Java Google App Engine
 
 ## About
 Car rental application on top of Google App Engine (GAE) focussing on high availability and performance scalability using indirect
-communication techniques offerend by GAE. (see full [car rental project](https://github.com/matt77hias/meta-carrental))
+communication techniques offerend by GAE. (See full [car rental project](https://github.com/matt77hias/meta-carrental))
 
 ## Design
 
